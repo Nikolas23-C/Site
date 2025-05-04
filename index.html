@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEH LIFE - Produtos Naturais em Santa Cruz do Sul</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7e22ce',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .tracking-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.5);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .status-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .status-item:not(:last-child):before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 2rem;
+            height: calc(100% - 2rem);
+            width: 2px;
+            background-color: #e5e7eb;
+        }
+        
+        .status-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .status-icon.completed {
+            background-color: #10b981;
+            color: white;
+        }
+        
+        .status-icon.pending {
+            background-color: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .status-icon.current {
+            background-color: #9333ea;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header/Navigation -->
+    <header class="bg-primary-700 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-leaf text-2xl"></i>
+                <h1 class="text-2xl font-bold">DEH LIFE</h1>
+            </div>
+            
+            <nav class="hidden md:flex space-x-6">
+                <a href="#home" class="hover:text-primary-200 transition">Início</a>
+                <a href="#products" class="hover:text-primary-200 transition">Produtos</a>
+                <a href="#about" class="hover:text-primary-200 transition">Sobre Nós</a>
+                <a href="#contact" class="hover:text-primary-200 transition">Contato</a>
+                <a href="#tracking" class="hover:text-primary-200 transition">Rastreio</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button class="relative">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                </button>
+                <button class="md:hidden" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-primary-800" id="mobile-menu">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#home" class="block py-2 hover:bg-primary-600 px-2 rounded">Início</a>
+                <a href="#products" class="block py-2 hover:bg-primary-600 px-2 rounded">Produtos</a>
+                <a href="#about" class="block py-2 hover:bg-primary-600 px-2 rounded">Sobre Nós</a>
+                <a href="#contact" class="block py-2 hover:bg-primary-600 px-2 rounded">Contato</a>
+                <a href="#tracking" class="block py-2 hover:bg-primary-600 px-2 rounded">Rastreio</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl bg-black bg-opacity-50 p-8 rounded-lg backdrop-blur-sm">
+                <h2 class="text-4xl font-bold mb-4">Produtos Naturais em Santa Cruz do Sul</h2>
+                <p class="text-xl mb-6">Alimentação saudável direto da natureza para sua família. Produtos orgânicos e sustentáveis.</p>
+                <a href="#products" class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-6 rounded-lg transition inline-block">Ver Produtos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="products" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Nossos Produtos</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1615485925504-54d1a24c361d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Mel Orgânico" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 right-2 bg-primary-600 text-white text-xs px-2 py-1 rounded">Orgânico</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Mel Orgânico Puro</h3>
+                        <p class="text-gray-600 mb-4">Produzido por abelhas nativas da região de Santa Cruz do Sul, sem aditivos químicos.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary-700">R$ 25,90</span>
+                            <button class="bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded transition">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1603569283847-aa6a0c1a0c9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Chá de Ervas" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 right-2 bg-primary-600 text-white text-xs px-2 py-1 rounded">Natural</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Chá de Ervas Diversas</h3>
+                        <p class="text-gray-600 mb-4">Seleção de ervas medicinais cultivadas sem agrotóxicos. Pacote com 10 saquinhos.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary-700">R$ 12,50</span>
+                            <button class="bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded transition">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Óleo de Coco" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 right-2 bg-primary-600 text-white text-xs px-2 py-1 rounded">Vegano</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Óleo de Coco Extra Virgem</h3>
+                        <p class="text-gray-600 mb-4">Extraído a frio, preservando todos os nutrientes. Embalagem de 200ml.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary-700">R$ 18,90</span>
+                            <button class="bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded transition">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1615485925504-54d1a24c361d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Castanhas" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 right-2 bg-primary-600 text-white text-xs px-2 py-1 rounded">Sem Glúten</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Mix de Castanhas</h3>
+                        <p class="text-gray-600 mb-4">Seleção premium de castanhas e nozes sem conservantes. Embalagem de 250g.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary-700">R$ 32,90</span>
+                            <button class="bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded transition">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1603569283847-aa6a0c1a0c9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Farinha" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 right-2 bg-primary-600 text-white text-xs px-2 py-1 rounded">Integral</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Farinha de Amêndoas</h3>
+                        <p class="text-gray-600 mb-4">Farinha de amêndoas 100% natural, sem adição de açúcar. Embalagem de 500g.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary-700">R$ 28,50</span>
+                            <button class="bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded transition">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Granola" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 right-2 bg-primary-600 text-white text-xs px-2 py-1 rounded">Sem Açúcar</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Granola Caseira</h3>
+                        <p class="text-gray-600 mb-4">Granola artesanal com mel, aveia e frutas secas. Embalagem de 400g.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary-700">R$ 22,90</span>
+                            <button class="bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded transition">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 7 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1615485925504-54d1a24c361d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Geleia" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 right-2 bg-primary-600 text-white text-xs px-2 py-1 rounded">Sem Conservantes</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Geleia de Frutas Vermelhas</h3>
+                        <p class="text-gray-600 mb-4">Geleia artesanal com frutas selecionadas. Pote de 250g.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary-700">R$ 19,90</span>
+                            <button class="bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded transition">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 8 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1603569283847-aa6a0c1a0c9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Barras" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 right-2 bg-primary-600 text-white text-xs px-2 py-1 rounded">Energético</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Barra de Cereal Proteica</h3>
+                        <p class="text-gray-600 mb-4">Barra energética com castanhas e frutas secas. Caixa com 5 unidades.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary-700">R$ 24,50</span>
+                            <button class="bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded transition">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="#" class="inline-block border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-medium py-2 px-6 rounded-lg transition">Ver Todos os Produtos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Sobre Nós" class="rounded-lg shadow-lg w-full">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800">Sobre a DEH LIFE</h2>
+                    <p class="text-gray-600 mb-4">Localizada no coração de Santa Cruz do Sul, a DEH LIFE nasceu da paixão por uma alimentação mais saudável e sustentável.</p>
+                    <p class="text-gray-600 mb-4">Trabalhamos diretamente com pequenos produtores da região, garantindo a qualidade e origem de todos os nossos produtos.</p>
+                    <p class="text-gray-600 mb-6">Nossa missão é conectar você com os melhores produtos naturais, livres de agrotóxicos e aditivos químicos, promovendo saúde e bem-estar.</p>
+                    <div class="flex space-x-4">
+                        <div class="bg-primary-100 p-4 rounded-lg flex-1">
+                            <i class="fas fa-seedling text-primary-600 text-2xl mb-2"></i>
+                            <h3 class="font-bold text-primary-800">Orgânicos</h3>
+                            <p class="text-sm text-gray-600">Certificados e testados</p>
+                        </div>
+                        <div class="bg-primary-100 p-4 rounded-lg flex-1">
+                            <i class="fas fa-truck text-primary-600 text-2xl mb-2"></i>
+                            <h3 class="font-bold text-primary-800">Entrega Rápida</h3>
+                            <p class="text-sm text-gray-600">Para toda Santa Cruz</p>
+                        </div>
+                        <div class="bg-primary-100 p-4 rounded-lg flex-1">
+                            <i class="fas fa-heart text-primary-600 text-2xl mb-2"></i>
+                            <h3 class="font-bold text-primary-800">Sustentável</h3>
+                            <p class="text-sm text-gray-600">Embalagens ecológicas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section id="tracking" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Rastreie Seu Pedido</h2>
+            
+            <div class="max-w-md mx-auto bg-gray-50 p-8 rounded-lg shadow-md">
+                <div class="mb-6">
+                    <label for="tracking-code" class="block text-gray-700 font-medium mb-2">Código de Rastreio dos Correios</label>
+                    <div class="flex">
+                        <input type="text" id="tracking-code" placeholder="Ex: AA123456789BR" class="tracking-input flex-grow px-4 py-2 border border-gray-300 rounded-l-lg focus:border-primary-500">
+                        <button id="track-button" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-r-lg transition">Rastrear</button>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">Insira o código de rastreio fornecido pelos Correios</p>
+                </div>
+                
+                <div id="tracking-result" class="hidden fade-in">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-lg text-gray-800">Status do Pedido</h3>
+                        <span id="tracking-number" class="text-sm bg-gray-200 px-2 py-1 rounded">AA123456789BR</span>
+                    </div>
+                    
+                    <div id="tracking-status" class="space-y-4">
+                        <!-- Status será preenchido via JavaScript -->
+                    </div>
+                    
+                    <div id="tracking-details" class="mt-6 border-t pt-4 hidden">
+                        <h4 class="font-bold mb-2">Detalhes da Entrega</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-gray-500">Origem</p>
+                                <p id="origin" class="font-medium">Santa Cruz do Sul/RS</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Destino</p>
+                                <p id="destination" class="font-medium">Porto Alegre/RS</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Data Postagem</p>
+                                <p id="posting-date" class="font-medium">10/06/2023</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Previsão Entrega</p>
+                                <p id="delivery-estimate" class="font-medium">15/06/2023</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <a id="correios-link" href="#" target="_blank" class="text-sm text-blue-600 hover:underline">Ver detalhes completos no site dos Correios</a>
+                    </div>
+                </div>
+                
+                <div id="tracking-error" class="hidden p-4 bg-red-100 text-red-700 rounded-lg mt-4">
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    <span id="error-message">Código de rastreio inválido ou não encontrado.</span>
+                </div>
+                
+                <div id="tracking-loading" class="hidden text-center py-8">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary-600 mb-2"></div>
+                    <p>Consultando os Correios...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Entre em Contato</h2>
+            
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Nossa Loja Física</h3>
+                    <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                        <div class="flex items-start mb-4">
+                            <i class="fas fa-map-marker-alt text-primary-600 mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-medium">Rua das Flores, 123</p>
+                                <p class="text-gray-600">Centro, Santa Cruz do Sul - RS</p>
+                                <p class="text-gray-600">CEP: 96810-000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start mb-4">
+                            <i class="fas fa-clock text-primary-600 mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-medium">Horário de Funcionamento</p>
+                                <p class="text-gray-600">Segunda a Sexta: 09:00 - 18:00</p>
+                                <p class="text-gray-600">Sábado: 09:00 - 13:00</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-phone-alt text-primary-600 mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-medium">Telefone</p>
+                                <p class="text-gray-600">(51) 99999-9999</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">Redes Sociais</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="bg-pink-600 text-white p-3 rounded-full hover:bg-pink-700 transition">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="bg-blue-400 text-white p-3 rounded-full hover:bg-blue-500 transition">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="bg-green-500 text-white p-3 rounded-full hover:bg-green-600 transition">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Mensagem</h3>
+                    <form class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Nome</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-primary-500 focus:outline-none">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">E-mail</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-primary-500 focus:outline-none">
+                        </div>
+                        <div class="mb-4">
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Telefone</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-primary-500 focus:outline-none">
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Mensagem</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-primary-500 focus:outline-none"></textarea>
+                        </div>
+                        <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-6 rounded-lg transition w-full">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-leaf text-2xl"></i>
+                        <h3 class="text-2xl font-bold">DEH LIFE</h3>
+                    </div>
+                    <p class="max-w-xs">Produtos naturais e orgânicos para uma vida mais saudável em Santa Cruz do Sul.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#home" class="hover:text-primary-300 transition">Início</a></li>
+                            <li><a href="#products" class="hover:text-primary-300 transition">Produtos</a></li>
+                            <li><a href="#about" class="hover:text-primary-300 transition">Sobre Nós</a></li>
+                            <li><a href="#contact" class="hover:text-primary-300 transition">Contato</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Ajuda</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-primary-300 transition">FAQ</a></li>
+                            <li><a href="#" class="hover:text-primary-300 transition">Entregas</a></li>
+                            <li><a href="#" class="hover:text-primary-300 transition">Pagamentos</a></li>
+                            <li><a href="#" class="hover:text-primary-300 transition">Trocas</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Pagamento</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <div class="bg-white p-2 rounded">
+                                <i class="fab fa-cc-visa text-blue-900 text-xl"></i>
+                            </div>
+                            <div class="bg-white p-2 rounded">
+                                <i class="fab fa-cc-mastercard text-red-600 text-xl"></i>
+                            </div>
+                            <div class="bg-white p-2 rounded">
+                                <i class="fab fa-cc-amex text-blue-600 text-xl"></i>
+                            </div>
+                            <div class="bg-white p-2 rounded">
+                                <i class="fab fa-pix text-green-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-primary-800 mt-8 pt-6 text-center md:text-left">
+                <p>&copy; 2023 DEH LIFE - Produtos Naturais. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Tracking simulation with Correios integration
+        document.getElementById('track-button').addEventListener('click', async function(e) {
+            e.preventDefault();
+            const code = document.getElementById('tracking-code').value.trim();
+            const result = document.getElementById('tracking-result');
+            const error = document.getElementById('tracking-error');
+            const loading = document.getElementById('tracking-loading');
+            
+            // Hide previous results/errors
+            result.classList.add('hidden');
+            error.classList.add('hidden');
+            
+            // Validate code format (basic validation for Correios tracking codes)
+            if (!code || !/^[A-Za-z]{2}[0-9]{9}[A-Za-z]{2}$/.test(code)) {
+                document.getElementById('error-message').textContent = 'Por favor, insira um código de rastreio válido no formato dos Correios (ex: AA123456789BR)';
+                error.classList.remove('hidden');
+                return;
+            }
+            
+            // Show loading indicator
+            loading.classList.remove('hidden');
+            
+            try {
+                // In a real implementation, you would call your backend which would then call the Correios API
+                // For this example, we'll simulate an API call with a timeout
+                const trackingData = await simulateCorreiosApiCall(code);
+                
+                // Hide loading indicator
+                loading.classList.add('hidden');
+                
+                if (trackingData.error) {
+                    document.getElementById('error-message').textContent = trackingData.error;
+                    error.classList.remove('hidden');
+                    return;
+                }
+                
+                // Update tracking number display
+                document.getElementById('tracking-number').textContent = code;
+                
+                // Update tracking status
+                const statusContainer = document.getElementById('tracking-status');
+                statusContainer.innerHTML = '';
+                
+                trackingData.events.forEach((event, index) => {
+                    const statusItem = document.createElement('div');
+                    statusItem.className = 'status-item';
+                    
+                    const statusIcon = document.createElement('div');
+                    statusIcon.className = 'status-icon ' + (index === 0 ? 'current' : 'completed');
+                    
+                    const icon = document.createElement('i');
+                    if (index === 0) {
+                        // Current status
+                        icon.className = 'fas fa-truck text-xs';
+                    } else {
+                        // Completed status
+                        icon.className = 'fas fa-check text-xs';
+                    }
+                    statusIcon.appendChild(icon);
+                    
+                    const statusContent = document.createElement('div');
+                    const statusTitle = document.createElement('p');
+                    statusTitle.className = 'font-medium text-gray-800';
+                    statusTitle.textContent = event.status;
+                    
+                    const statusDate = document.createElement('p');
+                    statusDate.className = 'text-sm text-gray-500';
+                    statusDate.textContent = event.date + (event.time ? ' - ' + event.time : '') + (event.location ? ' - ' + event.location : '');
+                    
+                    statusContent.appendChild(statusTitle);
+                    statusContent.appendChild(statusDate);
+                    
+                    statusItem.appendChild(statusIcon);
+                    statusItem.appendChild(statusContent);
+                    
+                    statusContainer.appendChild(statusItem);
+                });
+                
+                // Update delivery details if available
+                if (trackingData.details) {
+                    const details = document.getElementById('tracking-details');
+                    document.getElementById('origin').textContent = trackingData.details.origin;
+                    document.getElementById('destination').textContent = trackingData.details.destination;
+                    document.getElementById('posting-date').textContent = trackingData.details.postingDate;
+                    document.getElementById('delivery-estimate').textContent = trackingData.details.deliveryEstimate;
+                    details.classList.remove('hidden');
+                }
+                
+                // Update link to Correios website
+                document.getElementById('correios-link').href = `https://www2.correios.com.br/sistemas/rastreamento/resultado.cfm?objetos=${code}`;
+                
+                // Show results
+                result.classList.remove('hidden');
+                
+            } catch (err) {
+                loading.classList.add('hidden');
+                document.getElementById('error-message').textContent = 'Ocorreu um erro ao consultar os Correios. Por favor, tente novamente mais tarde.';
+                error.classList.remove('hidden');
+                console.error('Error tracking package:', err);
+            }
+        });
+        
+        // Function to simulate Correios API call
+        function simulateCorreiosApiCall(code) {
+            return new Promise((resolve) => {
+                // Simulate API delay
+                setTimeout(() => {
+                    // This is a simulation - in a real app, you would call the actual Correios API
+                    // or your backend service that interfaces with the Correios API
+                    
+                    // Sample tracking data structure
+                    const sampleData = {
+                        code: code,
+                        events: [
+                            {
+                                status: 'Objeto em trânsito - por favor aguarde',
+                                date: '13/06/2023',
+                                time: '10:15',
+                                location: 'CTE PORTO ALEGRE/RS'
+                            },
+                            {
+                                status: 'Objeto postado',
+                                date: '10/06/2023',
+                                time: '14:30',
+                                location: 'AG SANTA CRUZ DO SUL/RS'
+                            }
+                        ],
+                        details: {
+                            origin: 'Santa Cruz do Sul/RS',
+                            destination: 'Porto Alegre/RS',
+                            postingDate: '10/06/2023',
+                            deliveryEstimate: '15/06/2023'
+                        }
+                    };
+                    
+                    // Simulate different responses based on tracking code
+                    if (code.startsWith('AA')) {
+                        resolve(sampleData);
+                    } else if (code.startsWith('BB')) {
+                        resolve({
+                            error: 'Objeto não encontrado na base de dados dos Correios.'
+                        });
+                    } else {
+                        resolve(sampleData);
+                    }
+                }, 1500); // Simulate network delay
+            });
+        }
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Add animation class when elements come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
